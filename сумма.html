@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Complete JavaScript Course</title>
+</head>
+
+<body>
+    <span class="val1"></span>
+    <span>+</span>
+    <span class="val2"></span> =
+    <span>
+        <input type="text" name="answer">
+    </span><button>Check</button>
+    <div class="output"></div>
+</body>
+<script>
+    let app = function () {
+        let val1 = document.querySelector('.val1');
+        let val2 = document.querySelector('.val2');
+        let btn = document.querySelector('button');
+        let output = document.querySelector('.output');
+        let input = document.querySelector('input');
+        let game = {};
+
+        function init() {
+            btn.addEventListener('click', cheker);
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            game.randomNum1 = Math.floor(Math.random() * 100);
+            game.randomNum2 = Math.floor(Math.random() * 100);
+            game.sum = game.randomNum1 + game.randomNum2;
+            val1.textContent = game.randomNum1;
+            val2.textContent = game.randomNum2;
+
+        }
+
+        function cheker() {
+            let bg = input.value == game.sum ? 'green' : 'red';
+            output.innerHTML +=
+                `<div style = "color:${bg}">${game.randomNum1} + 
+                ${game.randomNum2} = ${game.sum} (${input.value})
+                </div>`;
+            input.value = "";
+            loadQuestion();
+        }
+        return {
+            init: init
+        };
+    }();
+
+    document.addEventListener('DOMContentLoaded', app.init);
+
+</script>
+
+</html>
